@@ -129,7 +129,7 @@ export default function App() {
 
 function replaceVowels(inputString, replacementChar) {
   // Regex ile sesli harfleri bulma
-  const vowelsRegex = /[aeiouü]/gi;
+  const vowelsRegex = /[aeioöuü]/gi;
 
   // inputString içindeki sesli harfleri replacementChar ile değiştirme
   const resultString = inputString.replace(vowelsRegex, replacementChar);
