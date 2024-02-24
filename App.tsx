@@ -8,20 +8,23 @@ import {
   Platform,
   Share,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import FullScreenIcon from "./components/Icons/FullScreen";
 import { StatusBar } from "expo-status-bar";
+import FullScreenIcon from "./components/Icons/FullScreen";
 import ShareIcon from "./components/Icons/ShareIcon";
+import InputModal from "./components/Modal/Modal";
 
 type Char = "i" | "o" | "ö" | "u" | "ü";
 const chars: Char[] = ["i", "o", "ö", "u", "ü"];
 
 export default function App() {
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
   const [outputValue, setOutput] = useState<string>("");
   const [inputValue, setInput] = useState<string>("");
   const [selectedChar, setSelectChar] = useState<Char>("i");
   const debouncedValue = useDebounce(inputValue, 250);
+  const textRef = useRef();
 
   useEffect(() => {
     setOutput(replaceVowels(debouncedValue, selectedChar));
@@ -30,7 +33,16 @@ export default function App() {
   return (
     <SafeAreaView className="flex-1 bg-dark px-2 py-4 flex justify-center">
       <StatusBar style="light" />
-
+      <InputModal
+        refText={textRef}
+        defaultText={inputValue}
+        isVisible={isModalVisible}
+        onChangeState={(text: string, visible: boolean) => {
+          if (!text) setInput("");
+          setInput(text);
+          setModalVisible(visible);
+        }}
+      />
       <View className="flex flex-col justify-center items-center m-2 ">
         <Text className="text-white font-bold text-2xl">Sipirmin</Text>
       </View>
@@ -41,17 +53,21 @@ export default function App() {
           <View className="flex-1 rounded-xl border-1 border border-borderDark overflow-hidden h-1/3">
             <View className="flex-1/3 flex flex-row justify-between bg-titleDark p-4 items-center">
               <Text className="text-textDark font-bold">Input</Text>
-              <TouchableOpacity className=" bg-borderDark p-2 rounded-xl justify-center items-center">
+              <TouchableOpacity
+                onPress={() => setModalVisible(true)}
+                className=" bg-borderDark p-2 rounded-xl justify-center items-center"
+              >
                 <FullScreenIcon />
               </TouchableOpacity>
             </View>
             <View className="flex-1 bg-areaDark">
               <TextInput
                 value={inputValue}
+                ref={textRef}
                 onChangeText={(text) => {
                   setInput(text);
                 }}
-                className="flex w-full text-white p-2"
+                className="flex w-full text-white p-2 "
                 keyboardType="default"
                 multiline
                 inputMode="text"
