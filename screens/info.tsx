@@ -10,7 +10,7 @@ export default function InfoScreen() {
           className="h-32 w-32"
         />
         <Text className="text-white font-bold text-3xl">Sipirmin</Text>
-        <Text className="text-textDark text-center">1.0.1</Text>
+        <Text className="text-textDark text-center">1.0.2</Text>
       </View>
       {/* HOW IS IT WORKS? */}
       <View>

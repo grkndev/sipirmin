@@ -13,21 +13,23 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Info"
-          component={InfoScreen}
-          options={{
-            headerShown: true,
-            headerStyle: { backgroundColor: "#0B0B0B" },
-            headerTintColor: "#fff",
-            headerTitle:"About App"
-          }}
-        />
+        
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Info"
+            component={InfoScreen}
+            options={{
+              headerShown: true,
+              headerStyle: { backgroundColor: "#0B0B0B" },
+              headerTintColor: "#fff",
+              headerTitle: "About App",
+            }}
+          />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

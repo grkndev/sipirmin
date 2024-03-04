@@ -167,7 +167,7 @@ export default function App({ navigation }) {
 
 function replaceVowels(inputString, replacementChar) {
   // Regex ile sesli harfleri bulma
-  const vowelsRegex = /[aeioöuü]/gi;
+  const vowelsRegex = /[aeioöuüİı]/gi;
 
   // inputString içindeki sesli harfleri replacementChar ile değiştirme. Eğer harf büyükse büyük, küçükse küçük olarak değiştirme
   const resultString = inputString.replace(vowelsRegex, (match) => {
